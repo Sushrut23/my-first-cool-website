@@ -1,19 +1,25 @@
-// This file handles Google Sheets API authentication
-// Ensure creds.json contains your service account credentials
+// Handles Google Sheets API authentication using service account from environment
 
 import { google } from 'googleapis';
-import { readFileSync } from 'fs';
-import path from 'path';
 
 export function getSheetsClient() {
-    const credsPath = path.join(__dirname, 'creds.json');
-    const creds = JSON.parse(readFileSync(credsPath, 'utf8'));
-    const auth = new google.auth.JWT({
-        email: creds.client_email,
-        key: creds.private_key,
-        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-    });
-    const sheetsClient = google.sheets({ version: 'v4', auth });
-    const spreadsheetId = '1vkDRkPh37FYVrrfGJ6nxIltxUs9NrL2SuOlmHCop0As';
-    return { sheetsClient, spreadsheetId };
+  const rawCreds = process.env.GOOGLE_SERVICE_ACCOUNT;
+
+  if (!rawCreds) {
+    throw new Error('GOOGLE_SERVICE_ACCOUNT environment variable not set.');
+  }
+
+  const creds = JSON.parse(rawCreds);
+
+  const auth = new google.auth.JWT({
+    email: creds.client_email,
+    key: creds.private_key,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+  });
+
+  const sheetsClient = google.sheets({ version: 'v4', auth });
+
+  const spreadsheetId = '1vkDRkPh37FYVrrfGJ6nxIltxUs9NrL2SuOlmHCop0As'; // Replace with your actual ID if needed
+
+  return { sheetsClient, spreadsheetId };
 }
