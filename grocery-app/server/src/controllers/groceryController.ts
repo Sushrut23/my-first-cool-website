@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getSheetsClient } from '../../../config/googleApiConfig';
+import { getSheetsClient } from '../config/googleApiConfig';
 
 export class GroceryController {
   async addItem(req: Request, res: Response) {
