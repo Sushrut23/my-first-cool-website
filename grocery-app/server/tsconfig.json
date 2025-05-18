@@ -4,7 +4,7 @@
     "module": "commonjs",
     "outDir": "dist",
     "strict": true,
-    "rootDir": "../",                            // 🔧 this includes both src and config
+    "rootDir": "src",                           // 🔧 this includes both src and config
     "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": "../",
