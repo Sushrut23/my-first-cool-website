@@ -11,9 +11,12 @@ export function getSheetsClient() {
 
   const creds = JSON.parse(rawCreds);
 
+  // Fix for private_key newlines when loaded from env
+  const fixedPrivateKey = creds.private_key.replace(/\\n/g, '\n');
+
   const auth = new google.auth.JWT({
     email: creds.client_email,
-    key: creds.private_key,
+    key: fixedPrivateKey,
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
 
