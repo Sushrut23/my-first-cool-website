@@ -4,7 +4,7 @@
     "module": "commonjs",
     "outDir": "dist",
     "strict": true,
-    "rootDir": "src",                           // 🔧 this includes both src and config
+    "rootDir": "../", // changed from "src" to include both src and config in dist
     "esModuleInterop": true,
     "skipLibCheck": true,
     "baseUrl": "../",
@@ -12,5 +12,5 @@
       "@config/*": ["config/*"]
     }
   },
-  "include": ["src/**/*", "../config/**/*"]      // ✅ this stays
+  "include": ["src/**/*", "../config/**/*"]
 }
