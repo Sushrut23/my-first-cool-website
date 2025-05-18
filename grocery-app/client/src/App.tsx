@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import GroceryForm from './components/GroceryForm'
 import GroceryList from './components/GroceryList'
